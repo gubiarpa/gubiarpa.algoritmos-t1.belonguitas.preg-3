@@ -22,6 +22,20 @@ int getMatchPosition(string searchingStr, string targetStr, int startPosition)
     return -1;
 }
 
+string enumMatchesPosition(IEnumerable<int> matches)
+{
+    var enumMatches = "";
+    var isFirstItem = true;
+
+    foreach (var match in matches)
+    {
+        enumMatches += (isFirstItem ? "" : " - ") + $"Posición {match + 1}";
+        isFirstItem = false;
+    }
+
+    return enumMatches;
+}
+
 void main()
 {
     //Console.Write("Ingrese la cadena de búsqueda: ");
@@ -52,6 +66,12 @@ void main()
 
         position = matchPosition + 1;
     }
+
+    /// Resultados
+    Console.WriteLine($"Cadena buscada: \"{targetStr}\"");
+    Console.WriteLine($"Cadena ingresada: \"{searchingStr}\"");
+    Console.WriteLine($"Salida del programa: {enumMatchesPosition(matches)}");
+    Console.WriteLine($"Número de veces que se repite: {matches.Count}");
 }
 
 main();
