@@ -38,13 +38,17 @@ string enumMatchesPosition(IEnumerable<int> matches)
 
 void main()
 {
-    //Console.Write("Ingrese la cadena de búsqueda: ");
-    var searchingStr = "Rindiendo la evAluación T1 de anAlisis de Algoritmos";//Console.ReadLine()?.Trim();
+    Console.Write("Ingrese la cadena de búsqueda: ");
+    var searchingStr = Console.ReadLine()?.Trim();
 
-    //Console.Write("Ingrese la cadena a buscar: ");
-    var targetStr = "Al";//Console.ReadLine()?.Trim();
+    Console.Write("Ingrese la cadena a buscar: ");
+    var targetStr = Console.ReadLine()?.Trim();
 
-    if (string.IsNullOrEmpty(searchingStr) || string.IsNullOrEmpty(targetStr))
+    if (
+        string.IsNullOrEmpty(searchingStr) ||
+        string.IsNullOrEmpty(targetStr) ||
+        targetStr.Length > searchingStr.Length
+        )
     {
         Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine("(!) Datos inválidos");
@@ -67,10 +71,12 @@ void main()
         position = matchPosition + 1;
     }
 
+    var enumMatches = matches.Count > 0 ? enumMatchesPosition(matches) : "[Sin coindencias]";
+
     /// Resultados
     Console.WriteLine($"Cadena buscada: \"{targetStr}\"");
     Console.WriteLine($"Cadena ingresada: \"{searchingStr}\"");
-    Console.WriteLine($"Salida del programa: {enumMatchesPosition(matches)}");
+    Console.WriteLine($"Salida del programa: {enumMatches}");
     Console.WriteLine($"Número de veces que se repite: {matches.Count}");
 }
 
